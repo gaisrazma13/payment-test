@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Payment Test</title>
+</head>
+<body style="text-align:center;font-family:sans-serif">
+
+<h2>TEST QRIS</h2>
+
+<button onclick="bayar()">Bayar Sekarang</button>
+
+<div id="hasil"></div>
+
+<script>
+async function bayar() {
+  const res = await fetch("/api/create");
+  const data = await res.json();
+
+  console.log(data);
+
+  if (data.qr_url) {
+    document.getElementById("hasil").innerHTML =
+      `<img src="${data.qr_url}" width="250">`;
+  } else {
+    document.getElementById("hasil").innerHTML =
+      "QR gagal muncul (cek console)";
+  }
+}
+</script>
+
+</body>
+</html>
